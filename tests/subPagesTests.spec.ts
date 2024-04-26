@@ -15,7 +15,7 @@ test('check CoC page', async({ page }) => {
     await expect(cocPage.safeHarborTitle).toBeVisible();
   })
 
-test.skip('check speakers page', async({ page }) => {
+test('check speakers page', async({ page }) => {
     const mainPage = new MainPage(page);
     const speakersPage = new SpeakersPage(page);
     

@@ -4,7 +4,7 @@ import { SchedulePage } from '../pages/sub_pages/schedulePage';
 import { data } from '../fixtures/testData';
 
 test.describe('Check main page sections', () => {
-  test.skip('should have Hero Block with 2 buttons', async({ page }) => {
+  test('should have Hero Block with 2 buttons', async({ page }) => {
     const mainPage = new MainPage(page);
     const schedulePage = new SchedulePage(page);
 
@@ -22,7 +22,7 @@ test.describe('Check main page sections', () => {
     await expect(page).toHaveURL('/registration/personal/');
     })
 
-  test.skip('should have offline section and to go to offline page', async({ page }) => {
+  test('should have offline section and to go to offline page', async({ page }) => {
       const mainPage = new MainPage(page);
       
       await mainPage.open();
@@ -34,19 +34,19 @@ test.describe('Check main page sections', () => {
       await expect(page).toHaveURL('/offline/');
     })
 
-  test.skip('should have schedule section', async({ page }) => {
+  test('should have schedule section', async({ page }) => {
       const mainPage = new MainPage(page);
       await mainPage.open();
       await expect(mainPage.scheduleSection).toBeVisible();    
     })
   
-  test.skip('should have news section', async({ page }) => {
+  test('should have news section', async({ page }) => {
       const mainPage = new MainPage(page);
       await mainPage.open();
       await expect(mainPage.newsSection).toBeVisible();
     })
 
-    test.skip('should have speakers section', async({ page }) => {
+    test('should have speakers section', async({ page }) => {
       const mainPage = new MainPage(page);
       await mainPage.open();
       await expect(mainPage.speakersSection).toBeVisible();  

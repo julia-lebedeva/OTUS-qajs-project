@@ -29,7 +29,7 @@ test.skip('should be able to submit proposal', async({ browser }) => {
     await expect(newPage).toHaveTitle(`${data.cfpTitile}`);
   })
 
-test.describe.skip('Should be able buy a ticket', () => {
+test.describe('Should be able buy a ticket', () => {
   test('should be able to buy a personal ticket', async({ page }) => {
     const mainPage = new MainPage(page);
     const registrationPage = new RegistrationPage(page);
