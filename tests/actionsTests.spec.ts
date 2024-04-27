@@ -5,7 +5,7 @@ import { MainPage } from '../pages/mainPage';
 import { users } from '../fixtures/.authData';
 import { data } from '../fixtures/testData';
 
-  test.skip('should be able to subscribe for news', async({ page }) => {
+  test('should be able to subscribe for news', async({ page }) => {
     const mainPage = new MainPage(page);
    
     await mainPage.open();
@@ -14,7 +14,7 @@ import { data } from '../fixtures/testData';
     await expect(mainPage.newsSection).toContainText(`${data.newsSectionText}`);
   })
 
-test.skip('should be able to submit proposal', async({ browser }) => {
+test('should be able to submit proposal', async({ browser }) => {
     const context = await browser.newContext();
     const page = await context.newPage();
     const mainPage = new MainPage(page);
@@ -30,14 +30,14 @@ test.skip('should be able to submit proposal', async({ browser }) => {
   })
 
 test.describe('Should be able buy a ticket', () => {
-  test('should be able to buy a personal ticket', async({ page }) => {
+  test.only('should be able to buy a personal ticket', async({ page }) => {
     const mainPage = new MainPage(page);
     const registrationPage = new RegistrationPage(page);
    
     await mainPage.open();
     await mainPage.goToRegisterPage(mainPage.menuPurchaseItem);
     await expect(page).toHaveURL('/registration/personal/');  
-    // Поверка страницы ппокупки персонального билета
+    // Поверка страницы покупки персонального билета
     await expect(registrationPage.personalButton).toBeVisible();
     await expect(registrationPage.corporateButton).toBeVisible();
     await expect(registrationPage.tariffDescription).toContainText(`${data.personalREgText}`);
@@ -46,7 +46,8 @@ test.describe('Should be able buy a ticket', () => {
     expect(totalNumber).toBeGreaterThanOrEqual(1);
     // Прооверка наличия виджета регистрации
     await registrationPage.register(registrationPage.onlinePersonalButton);
-    await expect(registrationPage.popupWidget).toBeVisible();
+    await page.waitForLoadState();
+    await expect(registrationPage.widgetContents).toBeVisible();
   })
 
   test('should be able to buy a corporate ticket', async({ page }) => {
@@ -67,6 +68,7 @@ test.describe('Should be able buy a ticket', () => {
     expect(totalNumber).toBeGreaterThanOrEqual(1);
     // Прооверка наличия виджета регистрации
     await registrationPage.register(registrationPage.onlineCorporateButton);
-    await expect(registrationPage.popupWidget).toBeVisible();
+    await page.waitForLoadState();
+    await expect(registrationPage.widgetContents).toBeVisible();
   })
 })
