@@ -30,7 +30,7 @@ test('should be able to submit proposal', async({ browser }) => {
   })
 
 test.describe('Should be able buy a ticket', () => {
-  test.only('should be able to buy a personal ticket', async({ page }) => {
+test('should be able to buy a personal ticket', async({page }) => {
     const mainPage = new MainPage(page);
     const registrationPage = new RegistrationPage(page);
    
@@ -44,10 +44,10 @@ test.describe('Should be able buy a ticket', () => {
     // Проверка наличия тарифнфх карточек
     const totalNumber = await registrationPage.card.count();
     expect(totalNumber).toBeGreaterThanOrEqual(1);
-    // Прооверка наличия виджета регистрации
-    await registrationPage.register(registrationPage.onlinePersonalButton);
-    await page.waitForLoadState();
-    await expect(registrationPage.widgetContents).toBeVisible();
+
+    for (let i=0; i < totalNumber; i++) {
+        await expect(registrationPage.registerButton.nth(i)).toBeVisible();
+    }
   })
 
   test('should be able to buy a corporate ticket', async({ page }) => {
@@ -66,9 +66,9 @@ test.describe('Should be able buy a ticket', () => {
     // Проверка наличия тарифнфх карточек
     const totalNumber = await registrationPage.card.count();
     expect(totalNumber).toBeGreaterThanOrEqual(1);
-    // Прооверка наличия виджета регистрации
-    await registrationPage.register(registrationPage.onlineCorporateButton);
-    await page.waitForLoadState();
-    await expect(registrationPage.widgetContents).toBeVisible();
+    
+    for (let i=0; i < totalNumber; i++) {
+        await expect(registrationPage.registerButton.nth(i)).toBeVisible();
+    }
   })
 })
