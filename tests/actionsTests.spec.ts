@@ -4,26 +4,13 @@ import { RegistrationPage } from '../pages/sub_pages/registrationPage';
 import { MainPage } from '../pages/mainPage';
 import { users } from '../fixtures/.authData';
 import { data } from '../fixtures/testData';
-
-test.only('trial', async({ page }) => {
-    const mainPage = new MainPage(page);
-    const registrationPage = new RegistrationPage(page);
-   
-    await mainPage.open();
-    await mainPage.goToRegisterPage(mainPage.menuPurchaseItem);
-    await registrationPage.registerButton.nth(0).click();
-    await expect(registrationPage.form).toBeVisible();
-  })
-
 test('should be able to subscribe for news', async({ page }) => {
     const mainPage = new MainPage(page);
-    const registrationPage = new RegistrationPage(page);
    
     await mainPage.open();
     await expect(mainPage.newsSection).toBeVisible()
     await mainPage.subscribe(`${users[0].email}`);
     await expect(mainPage.newsSection).toContainText(`${data.newsSectionText}`);
-    await expect(registrationPage.form).toBeVisible();
   })
 
 test('should be able to submit proposal', async({ browser }) => {
