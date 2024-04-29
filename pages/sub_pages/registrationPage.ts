@@ -1,4 +1,4 @@
-import { expect, type Locator, type Page } from '@playwright/test';
+import { FrameLocator, expect, type Locator, type Page } from '@playwright/test';
 import { BasePage } from '../basePage';
 export class RegistrationPage extends BasePage {
     readonly page: Page;
@@ -7,6 +7,7 @@ export class RegistrationPage extends BasePage {
     readonly card: Locator;
     readonly tariffDescription: Locator;
     readonly registerButton: Locator;
+    readonly form: Locator;
 
     constructor(page: Page) {
         super(page);
@@ -18,6 +19,7 @@ export class RegistrationPage extends BasePage {
         this.card = page.locator('#main__anchor >> ul').nth(1).getByRole('listitem');
         this.registerButton = page.getByRole('button', { name: /Купить билет/ });
         this.tariffDescription = page.locator('.RegistrationCategoryContent_registrationCategoryContent__description__SJzYI');
+        this.form = page.frameLocator('xpath=//iframe[contains(@name, \'popup\')]').locator('#eventreg_form');
     }
 
     async register() {
