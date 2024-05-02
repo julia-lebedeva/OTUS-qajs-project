@@ -29,45 +29,20 @@ test('should be able to submit proposal', async({ browser }) => {
   })
 
 test.describe('Should be able buy a ticket', () => {
-test('should be able to buy a personal ticket', async({page }) => {
-    const mainPage = new MainPage(page);
+  test('should be able to buy a personal ticket', async({ page }) => {
     const registrationPage = new RegistrationPage(page);
    
-    await mainPage.open();
-    await mainPage.goToRegisterPage(mainPage.menuPurchaseItem);
-    await expect(page).toHaveURL('/registration/personal/');  
-    // Поверка страницы покупки персонального билета
-    await expect(registrationPage.personalButton).toBeVisible();
-    await expect(registrationPage.corporateButton).toBeVisible();
-    await expect(registrationPage.tariffDescription).toContainText(`${data.personalREgText}`);
-    // Проверка наличия тарифнфх карточек
-    const totalNumber = await registrationPage.card.count();
-    expect(totalNumber).toBeGreaterThanOrEqual(1);
-
-    for (let i=0; i < totalNumber; i++) {
-        await expect(registrationPage.registerButton.nth(i)).toBeVisible();
-    }
+    await registrationPage.open();
+    await registrationPage.registerButton.first().click();
+    await expect(registrationPage.frame.locator('#eventreg_form')).toBeVisible();
   })
 
   test('should be able to buy a corporate ticket', async({ page }) => {
-    const mainPage = new MainPage(page);
     const registrationPage = new RegistrationPage(page);
     
-    await mainPage.open();
-    await mainPage.goToRegisterPage(mainPage.menuPurchaseItem);
-    await expect(page).toHaveURL('/registration/personal/');  
+    await registrationPage.open();
     await registrationPage.goToCorporatePage();
-    // Проверка старницы покупки корпоративного билета
-    await expect(page).toHaveURL('/registration/corporate/'); 
-    await expect(registrationPage.personalButton).toBeVisible();
-    await expect(registrationPage.corporateButton).toBeVisible();
-    await expect(registrationPage.tariffDescription).toContainText(`${data.corporateRegText}`);
-    // Проверка наличия тарифнфх карточек
-    const totalNumber = await registrationPage.card.count();
-    expect(totalNumber).toBeGreaterThanOrEqual(1);
-    
-    for (let i=0; i < totalNumber; i++) {
-        await expect(registrationPage.registerButton.nth(i)).toBeVisible();
-    }
+    await registrationPage.registerButton.first().click();
+    await expect(registrationPage.frame.locator('#eventreg_form')).toBeVisible();
   })
 })
