@@ -32,14 +32,14 @@ export class RegistrationPage extends BasePage {
     }
 
     async register() {
-        this.registerButton.click();
+        await this.registerButton.click();
     }
     
     async goToPersonalPage() {
-        this.personalButton.click();
+        await this.personalButton.click();
     };
 
     async goToCorporatePage() {
-        this.corporateButton.click();
+        await this.corporateButton.click();
     };
 }

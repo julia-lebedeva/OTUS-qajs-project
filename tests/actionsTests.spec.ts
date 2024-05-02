@@ -36,4 +36,13 @@ test.describe('Should be able buy a ticket', () => {
     await registrationPage.registerButton.first().click();
     await expect(registrationPage.frame.locator('#eventreg_form')).toBeVisible();
   })
+
+  test('should be able to buy a corporate ticket', async({ page }) => {
+    const registrationPage = new RegistrationPage(page);
+   
+    await registrationPage.open();
+    await registrationPage.goToCorporatePage();
+    await registrationPage.registerButton.first().click();
+    await expect(registrationPage.frame.locator('#eventreg_form')).toBeVisible();
+  })
 })
